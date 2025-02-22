@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Xmator",
+    "version": "1.0",
+    "description": "A smart Twitter unfollow tool",
+    "permissions": ["storage", "scripting", "tabs", "activeTab"],
+    "host_permissions": ["https://twitter.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.webp"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://twitter.com/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  

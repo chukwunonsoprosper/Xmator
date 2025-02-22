@@ -1,11 +1,16 @@
-(async function() {
-    async function sleep(ms) {
+(async function () {
+    function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function unfollow() {
+    let keywords = [];
+    chrome.storage.local.get("allowKeywords", (data) => {
+        keywords = data.allowKeywords || [];
+        startUnfollowing();
+    });
+
+    async function startUnfollowing() {
         let count = 0;
-        const allowKeywords = ["tech", "build", "developer", "coding", "programming", "engineer", "software", "AI", "ML", "crypto", "startup", "innovation"];
 
         while (true) {
             const buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-15ysp7h.r-4wgw6l.r-3pj75a.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
@@ -22,7 +27,7 @@
 
                 if (bioElement) {
                     const bioText = bioElement.innerText.toLowerCase();
-                    if (allowKeywords.some(keyword => bioText.includes(keyword))) continue;
+                    if (keywords.some(keyword => bioText.includes(keyword))) continue;
                 }
 
                 btn.click();
@@ -39,6 +44,4 @@
             await sleep(2000);
         }
     }
-
-    unfollow();
 })();
