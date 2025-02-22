@@ -4,16 +4,25 @@
     }
 
     let keywords = [];
-    chrome.storage.local.get("allowKeywords", (data) => {
-        keywords = data.allowKeywords || [];
-        startUnfollowing();
+    let mode = "unfollow";
+
+    chrome.storage.local.get(["keywords", "mode"], (data) => {
+        keywords = data.keywords || [];
+        mode = data.mode || "unfollow";
+        startAction();
     });
 
-    async function startUnfollowing() {
+    async function startAction() {
         let count = 0;
 
         while (true) {
-            const buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-15ysp7h.r-4wgw6l.r-3pj75a.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
+            let buttons;
+
+            if (mode === "follow") {
+                buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-15ysp7h.r-4wgw6l.r-3pj75a.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
+            } else {
+                buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr');
+            }
 
             if (buttons.length === 0) {
                 window.scrollBy(0, window.innerHeight);
@@ -27,17 +36,22 @@
 
                 if (bioElement) {
                     const bioText = bioElement.innerText.toLowerCase();
-                    if (keywords.some(keyword => bioText.includes(keyword))) continue;
+                    
+                    if (keywords.some(keyword => bioText.includes(keyword))) {
+                        if (mode === "follow" && btn.innerText.toLowerCase().includes("follow")) {
+                            btn.click();
+                            count++;
+                            await sleep(1500);
+                        } else if (mode === "unfollow" && btn.innerText.toLowerCase().includes("following")) {
+                            btn.click();
+                            await sleep(1000);
+                            const confirmBtn = document.querySelector('.css-175oi2r.r-16y2uox.r-6gpygo');
+                            if (confirmBtn) confirmBtn.click();
+                            count++;
+                            await sleep(1500);
+                        }
+                    }
                 }
-
-                btn.click();
-                await sleep(1100);
-
-                const confirmBtn = document.querySelector('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-16y2uox.r-6gpygo.r-1udh08x.r-1udbk01.r-3s2u2q.r-peo1c.r-1ps3wis.r-cxgwc0.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
-                if (confirmBtn) confirmBtn.click();
-
-                count++;
-                await sleep(1500);
             }
 
             window.scrollBy(0, window.innerHeight);

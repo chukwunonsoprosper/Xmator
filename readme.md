@@ -1,20 +1,20 @@
-# Xmator – Intelligent Auto-Unfollow Script for X (Twitter)
+# Xmator – Twitter Auto Follow/Unfollow Extension
 
-Xmator is a powerful automation script designed to help you efficiently manage your following list on X (formerly Twitter). Unlike traditional mass-unfollow tools, Xmator intelligently filters accounts based on their bios, ensuring that you do not unfollow tech-related accounts. The script automates the unfollowing process while maintaining a relevant and valuable network.
+🚀 Xmator is a powerful Chrome extension that automates following and unfollowing Twitter users based on specific keywords in their bio.
+
+⚠ **Warning**
+This extension interacts with Twitter's interface; use it responsibly. Excessive automated actions may result in temporary restrictions on your account. Ensure compliance with Twitter’s terms of service to avoid penalties.
 
 ## Features
 
-- **Smart Filtering**: Before unfollowing, Xmator checks user bios for tech-related keywords (e.g., "tech," "developer," "AI," "coding," "startup"). If a match is found, the user is skipped.
-- **Automated Unfollowing**: Clicks the unfollow button, handles confirmation popups, and confirms the action automatically.
-- **Auto-Scrolling**: If no more unfollow buttons are available, Xmator scrolls down to load additional accounts.
-- **Human-Like Behavior**: Includes randomized delays to mimic user activity and reduce the risk of detection.
-- **Continuous Execution**: The script runs automatically until all eligible accounts have been unfollowed.
+✅ Follow users whose bio contains specific keywords  
+✅ Unfollow users who don’t match your criteria  
+✅ Works automatically while scrolling  
+✅ Customizable keyword filtering
 
-## Installation & Usage
+## Installation
 
-1. Open X (Twitter) and navigate to your Following list.
-2. Open the browser’s Developer Console:
-    - **Chrome (Windows/Linux)**: Press `Ctrl + Shift + J`
+1. Download or clone this repository.
     - **Firefox (Windows/Linux)**: Press `Ctrl + Shift + K`
     - **Mac (Chrome/Firefox)**: Press `Cmd + Option + J` or `Cmd + Option + K`
 3. Copy and paste the Xmator script into the console, then press `Enter`.
