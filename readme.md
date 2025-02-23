@@ -26,8 +26,8 @@ Xmator is an open-source Chrome extension that automatically unfollows Twitter u
 If you want to modify or contribute to Xmator, clone the repository and install it manually:
 
 ```bash
-git clone https://github.com/yourusername/xmator.git
-cd xmator
+git clone https://github.com/chukwunonsoprosper/Xmator.git
+cd Xmator
 ```
 
 Now follow the Chrome Extension Method above to install it.

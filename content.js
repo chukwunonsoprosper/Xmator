@@ -42,7 +42,7 @@
                     await sleep(1500);
                 } 
                 else if (mode === "unfollow" && !containsKeyword && btn.innerText.toLowerCase().includes("following")) {
-                    console.log(`Unfollowing: ${bioText}`);
+                    // console.log(`Unfollowing: ${bioText}`);
                     btn.click();
                     await sleep(1000);
                     const confirmBtn = document.querySelector('.css-175oi2r.r-16y2uox.r-6gpygo');
