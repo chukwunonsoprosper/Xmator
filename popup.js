@@ -1,5 +1,3 @@
-// popup.js
-
 document.getElementById("start").addEventListener("click", () => {
     if (!chrome.storage || !chrome.storage.local) {
         console.error("Chrome storage is undefined. Make sure your manifest.json includes 'storage' permission.");

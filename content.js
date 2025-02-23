@@ -5,23 +5,24 @@
 
     let keywords = [];
     let mode = "unfollow";
-
-    // Get keywords & mode from Chrome storage
+    let followButtons, unfollowButtons, bioElements;
+    
     chrome.storage.local.get(["keywords", "mode"], (data) => {
         keywords = data.keywords || [];
         mode = data.mode || "unfollow";
         startAction();
     });
 
+    function listElements() {
+        followButtons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-15ysp7h.r-4wgw6l.r-3pj75a.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
+        unfollowButtons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr');
+        bioElements = document.querySelectorAll('.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3');
+    }
+
     async function startAction() {
         while (true) {
-            let buttons;
-
-            if (mode === "follow") {
-                buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-15ysp7h.r-4wgw6l.r-3pj75a.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l');
-            } else {
-                buttons = document.querySelectorAll('.css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr');
-            }
+            listElements();
+            let buttons = mode === "follow" ? followButtons : unfollowButtons;
 
             if (buttons.length === 0) {
                 window.scrollBy(0, window.innerHeight);
@@ -30,26 +31,25 @@
             }
 
             for (const btn of buttons) {
-                const userContainer = btn.closest("div")?.parentElement;
-                const bioElement = userContainer?.querySelector('.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3');
-
-                if (bioElement) {
-                    const bioText = bioElement.innerText.toLowerCase();
-
-                    if (keywords.some(keyword => bioText.includes(keyword))) {
-                        if (mode === "follow" && btn.innerText.toLowerCase().includes("follow")) {
-                            btn.click();
-                            await sleep(1500);
-                        } 
-                        else if (mode === "unfollow" && btn.innerText.toLowerCase().includes("following")) {
-                            btn.click();
-                            await sleep(1000);
-                            const confirmBtn = document.querySelector('.css-175oi2r.r-16y2uox.r-6gpygo');
-                            if (confirmBtn) {
-                                confirmBtn.click();
-                                await sleep(1500);
-                            }
-                        }
+                const bioElement = btn.closest("div")?.parentElement?.querySelector('.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3');
+                let bioText = bioElement ? bioElement.innerText.toLowerCase() : "unknown";
+                
+                const containsKeyword = keywords.some(keyword => bioText.includes(keyword));
+                
+                if (mode === "follow" && containsKeyword && btn.innerText.toLowerCase().includes("follow")) {
+                    btn.click();
+                    console.log(`Followed: ${bioText}`);
+                    await sleep(1500);
+                } 
+                else if (mode === "unfollow" && !containsKeyword && btn.innerText.toLowerCase().includes("following")) {
+                    console.log(`Unfollowing: ${bioText}`);
+                    btn.click();
+                    await sleep(1000);
+                    const confirmBtn = document.querySelector('.css-175oi2r.r-16y2uox.r-6gpygo');
+                    if (confirmBtn) {
+                        confirmBtn.click();
+                        console.log(`Unfollowed: ${bioText}`);
+                        await sleep(1500);
                     }
                 }
             }
