@@ -1,11 +1,11 @@
 # Xmator – Smart Twitter Unfollow Automation
 
-Xmator is an open-source Chrome extension that automatically unfollows Twitter users whose bio isn’t tech-related. It scans profiles, detects non-tech accounts, and removes them—helping you maintain a tech-focused network.
+Xmator is an open-source Chrome extension that automatically unfollows Twitter users whose bio doesn’t match your specified keywords. It scans profiles, detects non-relevant accounts, and removes them—helping you maintain a focused network.
 
 ## 🚀 Features
 
-✅ Scans Twitter bios for tech-related keywords  
-✅ Automatically unfollows non-tech accounts  
+✅ Scans Twitter bios for specified keywords  
+✅ Automatically unfollows non-relevant accounts  
 ✅ Keeps your Twitter feed clean and relevant  
 ✅ Runs directly in your browser as a Chrome extension  
 ✅ Open-source and fully customizable  
@@ -14,7 +14,7 @@ Xmator is an open-source Chrome extension that automatically unfollows Twitter u
 
 ### 🔹 Quick Install (Chrome Extension Method)
 
-1. Download Xmator from GitHub Releases github: [https://github.com/chukwunonsoprosper/Xmator].
+1. Download Xmator from GitHub Releases: [https://github.com/chukwunonsoprosper/Xmator].
 2. Extract the ZIP file to a folder on your computer.
 3. Open Google Chrome and go to: `chrome://extensions/`
 4. Enable Developer mode (toggle at the top right).
@@ -36,20 +36,20 @@ Now follow the Chrome Extension Method above to install it.
 
 1. Open Twitter and go to your following list.
 2. Click on the Xmator extension icon in your browser.
-3. Click "Start" it will scan bios and unfollow non-tech accounts.
-4. Done! Your Twitter following list is now more relevant and tech-focused.
+3. Click "Start" it will scan bios and unfollow non-relevant accounts.
+4. Done! Your Twitter following list is now more relevant and focused.
 
 ## 🛠 Customization
 
-### Modify Tech Keywords
+### Modify Keywords
 
-You can customize the keywords Xmator uses to detect tech accounts:
+You can customize the keywords Xmator uses to detect relevant accounts:
 
 1. Open the extension folder on your PC.
-2. Edit the `config.js` file and update the `TECH_KEYWORDS` array:
+2. Edit the `config.js` file and update the `KEYWORDS` array:
 
 ```javascript
-const TECH_KEYWORDS = ["developer", "engineer", "startup", "AI", "Web3", "cybersecurity"];
+const KEYWORDS = ["developer", "engineer", "startup", "AI", "Web3", "cybersecurity"];
 ```
 
 3. Save the file and reload the extension in Chrome.
