@@ -4,7 +4,7 @@ document.getElementById("start").addEventListener("click", () => {
         return;
     }
 
-    const keywords = document.getElementById("keywords").value.toLowerCase().split(",").map(k => k.trim());
+    const keywords = document.getElementById("keywords").value.toLowerCase().split(",").map(k => k.trim()).filter(k => k !== "");
     const mode = document.querySelector('input[name="mode"]:checked').value;
 
     chrome.storage.local.set({ keywords, mode }, () => {
